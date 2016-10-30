@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+<!-- 	<meta charset="utf-8"> -->
+	<title>C++ Note</title>
+	<!--#include virtual="includes/header.ssi" -->
+
+</head>
+
+<body>
+	<!-- Primary Page Layout
+	================================================== -->
+	<header id="header" class="site-header" role="banner">
+	<div id="header-inner" class="container sixteen columns over">
+	<hgroup class="one-third column alpha">
+	<h1 id="site-title" class="site-title">
+   	<a href="sidebar-left.html" id="logo"><img src="images/favicon.ico.1" alt="Hailey Xia logo" height="40" width="40" /></a> Hailey Xia
+    </h1>
+    </hgroup>
+    
+    <nav id="main-nav" class="two thirds column omega">
+	<ul id="main-nav-menu" class="nav-menu">
+	<li id="menu-item-1">
+	<a href="index.html">Home</a>
+	</li>
+	<li id="menu-item-2">
+	<a href="linkedlist.html">Resources</a>
+	</li>
+	<li id="menu-item-4" class="current">
+	<a href="sidebar-left.html">C++ Note</a>
+	</li>
+	<li id="menu-item-6">
+	<a href="contact.html">Contact</a>
+	</li>
+	</ul>
+	</nav>
+    
+    </div>
+	</header>
+
+	<div class="container">
+    
+		<aside class="four columns left-sidebar">
+        <div class="sidebar-widget">
+        <h2>What is this?</h2>
+        <p>This is the hallowed left hand sidebar.  In this side bar you can do whatever - link to ice cold bloggers, show off your knowledge of the polar ice caps, or just share a photo of a cute pengiun.  LOLPengz anyone?</p>
+        </div>
+        
+        <div class="sidebar-widget">
+        <h2>Some links</h2>
+        <ul>
+        <li><a href="#">Penguin kicks a polar bears ass</a></li>
+        <li><a href="#">Scientists insert abandoned ship inside an Penguin</a></li>
+        <li><a href="#">How big was the Penguin that sunk the Titanic?</a></li>
+        </ul>
+        </div>
+        
+        <div class="sidebar-widget">
+        <h2>Penguins are cool, man</h2>
+        <p>Few things in life are as beautiful, awe-inspiring and cool - both literally and figuratively - as an Penguin.  Except, maybe, Iceberrrg.</p>
+        </div>
+        
+        </aside>
+        <!-- End Left Sidebar -->
+        
+        
+        <article class="twelve columns main-content">
+        <h2>Week7 overload</h2>
+        
+<!--         <img src="images/manga.jpg" class="scale-with-grid"> -->
+        
+        <p>
+		<br>overload ++</br>
+		<pre class ="brush: cpp">
+		LinkedList::iterator LinkedList::iterator::operator++(){
+			current = current -> next;
+			return current;
+		}
+		</pre>
+		<br>overload > operator</br>
+		<pre class = "brush: cpp">
+		itr->x == (itr.operator->())->x;
+
+		LinkedList::iterator::operator->(){
+			return &*(*this);  // first  *means itself, second * call operator * and return the address of the value.
+		}
+		</pre>
+        
+        
+        <h2>Week8</h2>
+        <pre class = "brush: cpp">
+			[11/11] 
+			 DEFAULT PARAMETERS goes to declaration, not definition
+
+			// Declare default
+			void f(int a, int b=5, int c=42);
+			void f(int a, int b, int c) {
+			  cout <<…
+			}
+		</pre>
+
+			f(1)
+			f(1,2)
+			—————————————————
+			in template, everyone goes to .h file
+
+		<pre class = "brush: cpp">
+			template &lt;typename ValueType&gt;
+			class Vector&lt;ValueType&gt;::Vector()
+
+			// initialization list
+			Vector&lt;ValueType&gt;::Vector(const std::size_t& intialSize, const ValueType& initialValue){
+				allocator
+				initialSize
+				elems(new ValueType(allocatedSize))
+					fill(begin(),  end(),  initialSize);
+
+			}
+		</pre>
+
+			Copy Constructor
+			&lt;pre class = "brush: cpp"&gt;
+			//directly call the copy constructor
+			int x(4);
+
+			Vector&lt;int&gt; a=;
+			Vector&lt;int&gt; b(a);
+
+			template&lt;typename ValueType&gt;::Vector (const Vector&lt;ValueType&gt;&other){
+			allocator
+			initialSize
+			elems(new ValueType(allocatedSize))
+			fill(begin(),  end(),  initialSize);
+			}
+			</pre>
+
+			Copy Assignment
+			<pre class = "brush: cpp">
+			//copy constructor
+			int a =b;
+			//copy assignment
+			a=b;
+			</pre>
+
+			Issues
+			Catching memory leaks
+			…
+
+			copy and swap
+
+			Quirk
+			<pre class = "brush: cpp">
+			Vector&lt;int&gt; b=15;   //implicit converter
+			Vector&lt;int&gt; b=Vector&lt;string&gt;(15);
+
+			// solve: add “explicit" in front of the constructor
+			</pre>
+			
+			
+		<h2>Week9 Inheritance & Virtual & Polymorphism & Abstract Classes</h2>
+		
+		<br>Bird.h -------</br>
+		<span class="tab">|</span>
+		<span class="tab">--Penguin.h</span>
+		<pre class = "brush: cpp">
+		int main(){
+		Bird a("Albatross");
+		doFly(a);
+		
+		Penguin p;
+		doFly(p);
+		
+		}	
+		</pre>
+		<ul class="circle">
+     	<li>If you have a destructor, use virtual. Explain: leak memory- penguin will call bird destructor, instead of penguin destructor</li>
+		<li>C++ has multiple inheritance.</li>
+     	</ul>
+		
+        </p>
+
+		<p>Sushi or Kungpao Chicken?</p>
+
+      
+        </article>
+        <!-- End main Content -->
+      
+    
+    </div>
+
+<!--#include virtual="includes/footer.ssi" -->
+<!-- End Document
+================================================== -->
+</body>
+</html>
+

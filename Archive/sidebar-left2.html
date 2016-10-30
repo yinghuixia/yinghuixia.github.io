@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+<!-- 	<meta charset="utf-8"> -->
+	<title>??2</title>
+	<!--#include virtual="includes/header.ssi" -->
+
+</head>
+
+<body>
+
+	<!-- Primary Page Layout
+	================================================== -->
+	<header id="header" class="site-header" role="banner">
+	<div id="header-inner" class="container sixteen columns over">
+	<hgroup class="one-third column alpha">
+	<h1 id="site-title" class="site-title">
+   	<a href="sidebar-left.html" id="logo"><img src="images/favicon.ico.1" alt="Hailey Xia logo" height="40" width="40" /></a> Hailey Xia
+    </h1>
+    </hgroup>
+    
+	<nav id="main-nav" class="two thirds column omega">
+	<ul id="main-nav-menu" class="nav-menu">
+	<li id="menu-item-1">
+	<a href="index.html">Home</a>
+	</li>
+	<li id="menu-item-2">
+	<a href="linkedlist.html">Resources</a>
+	</li>
+	<li id="menu-item-4" class="current">
+	<a href="sidebar-left.html">C++ Note</a>
+	</li>
+	<li id="menu-item-6">
+	<a href="contact.html">Contact</a>
+	</li>
+	</ul>
+	</nav>
+	
+	</div>
+	</header>
+
+	<div class="container">
+    
+		<aside class="four columns left-sidebar">
+        <div class="sidebar-widget">
+        <h2>Contents</h2>
+        <ul>
+        <li><a href="sidebar-left2.html">16-pointers-linked-nodes</a></li>
+        <li><a href="sidebar-left3.html">17-linked-lists</a></li>
+        <li><a href="sidebar-left4.html">18-priorityqueue-heap</a></li>
+        </ul>
+        </div>
+        
+        </aside>
+        <!-- End Left Sidebar -->
+        
+        
+        <article class="twelve columns main-content">
+        <h2>ListNode</h2>
+
+        <p>
+		<br></br>
+		<pre class ="brush: cpp">
+		/*
+		 * CS 106B, Marty Stepp
+		 * 
+		 * This program is a client that uses our ListNode structure.
+		 */
+
+		#include <iostream>
+		#include "console.h"
+		#include "ListNode.h"
+		using namespace std;
+
+		int main() {
+			// let's make a list to store {42, -3, 17, 99}
+			ListNode* node = new ListNode();
+			node->data = 42;
+			node->next = new ListNode();
+			node->next->data = -3;
+			node->next->next = new ListNode();
+			node->next->next->data = 17;
+			node->next->next->next = new ListNode();
+			node->next->next->next->data = 99;
+			node->next->next->next->next = NULL;
+	
+			// now let's change from:
+			//   node [ 42 ] -> [ -3 ] -> [ 17 ] -> [ 99 ] /
+			// to:
+			//   node [ 51 ] -> [ 42 ] -> [ -3 ] -> [ 17 ] -> [ 99 ] /
+	
+			ListNode* newStuff = new ListNode();
+			newStuff->data = 51;
+			newStuff->next = node;
+			node = newStuff;
+	
+			//             [ 42 ] -> [ -3 ] -> [ 17 ] -> [ 99 ] /
+			//             ^
+			//     node    |        
+			// newStuff [ 51 ] 
+
+			return 0;
+		}
+		
+		
+		</pre>
+        
+
+		<br></br>
+		<pre class ="brush: cpp">
+		/*
+		 * CS 106B, Marty Stepp
+		 * This file declares a "ListNode" structure to represent a single element
+		 * of data in a list and a pointer to another node.
+		 */
+
+		#ifndef _listnode_h
+		#define _listnode_h
+
+		/*
+		 * The internal structure representing a single node of data.
+		 */
+		struct ListNode {
+			int data;         // element stored in each node
+			ListNode* next;   // pointer to the next node (NULL if none)
+	
+			ListNode(int d = 0, ListNode* n = NULL) {
+				data = d;
+				next = n;
+			}
+		};
+
+		#endif
+		</pre>
+
+      
+        </article>
+        <!-- End main Content -->
+      
+    
+    </div>
+
+<!--#include virtual="includes/footer.ssi" -->
+
+<!-- End Document
+================================================== -->
+</body>
+</html>
+

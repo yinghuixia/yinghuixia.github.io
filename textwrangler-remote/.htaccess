@@ -1,0 +1,7 @@
+AuthUserFile /afs/ir/users/y/i/yinghui/WWW/textwrangler-remote/.htpasswd
+AuthName ByPassword
+AuthType Basic
+
+order deny,allow
+deny from all
+require valid-user

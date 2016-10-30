@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+<!-- 	<meta charset="utf-8"> -->
+	<title>??4</title>
+	<!--#include virtual="includes/header.ssi" -->
+
+</head>
+<body>
+
+	<!-- Primary Page Layout
+	================================================== -->
+	<header id="header" class="site-header" role="banner">
+	<div id="header-inner" class="container sixteen columns over">
+	<hgroup class="one-third column alpha">
+	<h1 id="site-title" class="site-title">
+   	<a href="sidebar-left.html" id="logo"><img src="images/favicon.ico.1" alt="Hailey Xia logo" height="40" width="40" /></a> Hailey Xia
+    </h1>
+    </hgroup>
+    
+	<nav id="main-nav" class="two thirds column omega">
+	<ul id="main-nav-menu" class="nav-menu">
+	<li id="menu-item-1">
+	<a href="index.html">Home</a>
+	</li>
+	<li id="menu-item-2">
+	<a href="linkedlist.html">Resources</a>
+	</li>
+	<li id="menu-item-4" class="current">
+	<a href="sidebar-left.html">C++ Note</a>
+	</li>
+	<li id="menu-item-6">
+	<a href="contact.html">Contact</a>
+	</li>
+	</ul>
+	</nav>
+	
+	</div>
+	</header>
+
+	<div class="container">
+    
+		<aside class="four columns left-sidebar">
+        <div class="sidebar-widget">
+        <h2>Contents</h2>
+        <ul>
+        <li><a href="sidebar-left2.html">16-pointers-linked-nodes</a></li>
+        <li><a href="sidebar-left3.html">17-linked-lists</a></li>
+        <li><a href="sidebar-left4.html">18-priorityqueue-heap</a></li>
+        </ul>
+        </div>
+        
+        </aside>
+        <!-- End Left Sidebar -->
+        
+        
+        <article class="twelve columns main-content">
+        <h2>LinkedList2</h2>
+
+        <p>
+		<br></br>
+		<pre class ="brush: cpp">
+		/*
+		 * CS 106B, Marty Stepp
+		 * 
+		 * LinkedList.cpp implements the LinkedList class behavior declared in LinkedList.h.
+		 * Today's version implements all declared functionality.
+		 */
+
+		#include "LinkedList.h"
+
+		/*
+		 * Constructs a new empty list.
+		 */
+		LinkedList::LinkedList() {
+			front = NULL;
+		}
+
+		/*
+		 * This destructor frees the memory that was allocated internally by the list.
+		 */
+		LinkedList::~LinkedList() {
+			clear();   // this will free the memory
+		}
+
+		/*
+		 * Appends the given value to the end of the list.
+		 */
+		void LinkedList::add(int value) {
+			if (front == NULL) {
+				// empty list; new node should be the front
+				front = new ListNode(value);
+			} else {
+				// I have existing nodes;
+				// walk to end, and add the new node after the last one
+				ListNode* current = front;
+				while (current->next != NULL) {
+					current = current->next;
+				}
+				current->next = new ListNode(value);
+			}
+		}
+
+
+		/*
+		 * Removes all values from the list.
+		 */
+		void LinkedList::clear() {
+			// we must make sure not to leak memory here
+			while (front != NULL) {
+				remove(0);
+			}
+		}
+
+		/*
+		 * Returns the value at the given 0-based index of the list.
+		 * Throws an integer exception if the given index is not between
+		 * [0 - size - 1], inclusive.
+		 */
+		int LinkedList::get(int index) const {
+			ListNode* current = front;
+			for (int i = 0; i < index; i++) {
+				current = current->next;
+			}
+			return current->data;
+		}
+
+		/*
+		 * Adds the given value just before the given 0-based index in the list,
+		 * shifting subsequent elements right as necessary to make room.
+		 * Throws an integer exception if the given index is not between
+		 * [0 - size], inclusive.  (If size is passed, appends to the end.)
+		 */
+		void LinkedList::insert(int index, int value) {
+			checkIndex(index, 0, size());
+			if (index == 0) {
+				// insert at the front of the list
+				ListNode* newNode = new ListNode(value);
+				newNode->next = front;
+				front = newNode;
+			} else {
+				// insert later in the list
+				ListNode* current = front;
+				for (int i = 0; i < index - 1; i++) {
+					current = current->next;
+				}
+				ListNode* newNode = new ListNode(value);
+				newNode->next = current->next;
+				current->next = newNode;
+			}
+		}
+
+		/*
+		 * Returns true if there are no elements in the list.
+		 */
+		bool LinkedList::isEmpty() const {
+			return front == NULL;
+		}
+
+		/*
+		 * Removes the element at the given 0-based index from the list,
+		 * shifting subsequent elements left as necessary to cover its slot.
+		 * Throws an integer exception if the given index is not between
+		 * [0 - size - 1], inclusive.
+		 */
+		void LinkedList::remove(int index) {
+			checkIndex(index, 0, size() - 1);
+			if (index == 0) {
+				// remove from the front of the list
+				ListNode* trash = front;
+				front = front->next;
+				delete trash;
+			} else {
+				// remove from later in the list
+				ListNode* current = front;
+				for (int i = 0; i < index - 1; i++) {
+					current = current->next;
+				}
+				ListNode* trash = current->next;
+				current->next = current->next->next;
+				delete trash;
+			}
+		}
+
+		/*
+		 * Stores the given value at the given 0-based index in the list.
+		 * Throws an integer exception if the given index is not between
+		 * [0 - size - 1], inclusive.
+		 */
+		void LinkedList::set(int index, int value) {
+			checkIndex(index, 0, size() - 1);
+			ListNode* current = front;
+			for (int i = 0; i < index; i++) {
+				current = current->next;
+			}
+			current->data = value;
+		}
+
+		/*
+		 * Returns the number of elements in the list.
+		 */
+		int LinkedList::size() const {
+			// we could keep a 'mysize' field for efficiency,
+			// but this code shows how 
+			int count = 0;
+			ListNode* current = front;
+			while (current != NULL) {
+				current = current->next;
+				count++;
+			}
+			return count;
+		}
+
+		/*
+		 * This helper throws an integer exception if the given index is not between
+		 * the given min/max indexes, inclusive.
+		 */
+		void LinkedList::checkIndex(int index, int min, int max) const {
+			if (index < min || index > max) {
+				throw index;
+			}
+		}
+
+		/*
+		 * Prints a string representation of the list such as "{10, 20, 30, 40}".
+		 */
+		ostream& operator <<(ostream& out, LinkedList& list) {
+			out << "{";
+			if (!list.isEmpty()) {
+				out << list.front->data;
+				ListNode* current = list.front->next;
+				while (current != NULL) {
+					out << ", " << current->data;
+					current = current->next;
+				}
+			}
+			out << "}";
+			return out;
+		}
+		
+		
+		</pre>
+        
+
+		<br></br>
+		<pre class ="brush: cpp">
+		/*
+		 * CS 106B, Marty Stepp
+		 *
+		 * This program is a client that uses our LinkedList class.
+		 */
+
+		#include <iostream>
+		#include "console.h"
+		#include "LinkedList.h"
+
+		using namespace std;
+
+		void testAdd(LinkedList& list);
+		void testRemove(LinkedList& list);
+		void testMisc(LinkedList& list);
+		void testResize(LinkedList& list);
+		void testAssign(LinkedList& list);
+		void testException(LinkedList& list);
+
+		int main() {
+			LinkedList list;
+
+			testAdd(list);
+			testMisc(list);
+			testResize(list);
+			testRemove(list);
+			// testAssign(list);
+			// testException(list);
+
+			cout << "exiting main" << endl;
+			return 0;
+		}
+
+		void testAdd(LinkedList& list) {
+			cout << "add:" << endl;
+			list.add(42);
+			list.add(-5);
+			list.add(17);
+			list.add(28);
+			cout << list << ", size " << list.size() << endl;
+			// list.debug();
+			cout << endl;
+
+			cout << "insert:" << endl;
+			list.insert(1, 111);
+			cout << list << ", size " << list.size() << endl;
+			list.insert(4, 444);
+			cout << list << ", size " << list.size() << endl;
+			list.insert(0, 0);
+			cout << list << ", size " << list.size() << endl;
+			list.insert(7, 7777);
+			cout << list << ", size " << list.size() << endl;
+			cout << endl;
+		}
+
+		void testRemove(LinkedList& list) {
+			cout << "remove:" << endl;
+			list.remove(2);
+			cout << list << ", size " << list.size() << endl;
+			list.remove(list.size() - 1);
+			cout << list << ", size " << list.size() << endl;
+			list.remove(0);
+			cout << list << ", size " << list.size() << endl;
+			cout << endl;
+		}
+
+		void testMisc(LinkedList& list) {
+			cout << "get:" << endl;
+			for (int i = 0; i < list.size(); i++) {
+				cout << "index " << i << ": " << list.get(i) << endl;
+			}
+			cout << endl;
+
+			cout << "set:" << endl;
+			list.set(2, 222);
+			cout << list << ", size " << list.size() << endl;
+			list.set(0, 12345);
+			cout << list << ", size " << list.size() << endl;
+			cout << endl;
+
+			cout << "clear:" << endl;
+			list.clear();
+			cout << list << ", size " << list.size() << endl;
+			cout << endl;
+		}
+
+		void testResize(LinkedList& list) {
+			cout << "resize:" << endl;
+			for (int i = 1; i <= 25; i++) {
+				list.add(i);
+				cout << list << ", size " << list.size() << endl;
+				// list.debug();
+			}
+			cout << endl;
+		}
+
+		void testAssign(LinkedList& list) {
+			cout << "assignment:" << endl;
+			list.clear();
+			for (int i = 1; i <= 5; i++) {
+				list.add(i * 10);
+			}
+			LinkedList list2 = list;
+			cout << "list    : " << list << ", size " << list.size() << endl;
+			// list.debug();
+			cout << "list2   : " << list2 << ", size " << list2.size() << endl;
+			// list2.debug();
+			cout << endl;
+
+			list2.add(60);
+			list2.set(1, 99);
+			list.remove(3);
+			cout << "list    : " << list << ", size " << list.size() << endl;
+			// list.debug();
+			cout << "list2   : " << list2 << ", size " << list2.size() << endl;
+			// list2.debug();
+			cout << endl;
+		}
+
+		void testException(LinkedList& list) {
+			cout << "index checking:" << endl;
+			list.insert(-3, 99999);
+		}
+		
+		
+		</pre>
+
+      
+        </article>
+        <!-- End main Content -->
+      
+    
+    </div>
+
+<!--#include virtual="includes/footer.ssi" -->
+<!-- End Document
+================================================== -->
+</body>
+</html>
+
