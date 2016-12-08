@@ -1,8 +1,0 @@
-AuthUserFile /afs/ir/users/y/i/yinghui/WWW/SyntaxHighlighter/.htpasswd
-AuthName ByPassword
-AuthType Basic
-
-order deny,allow
-deny from all
-allow from .stanford.edu
-#require valid-user
