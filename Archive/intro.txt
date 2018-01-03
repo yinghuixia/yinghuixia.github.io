@@ -1,6 +1,0 @@
-好的assumptions不一定听起来合理。The importance of an assumption depends on how likely it is to be correct, and HOW MUCH the result changes when the assumption fails.
-e.g. In 2-sample test, equal variance is a more important assumption.
-
-SOLUTION: embed it in a bigger model to see how sensitive the results are. 
-
-Sampling models

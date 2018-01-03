@@ -1,7 +1,0 @@
-AuthUserFile /afs/ir/users/y/i/yinghui/WWW/Archive/.htpasswd 
-AuthName ByPassword
-AuthType Basic
-
-order deny,allow
-allow from all
-require valid-user
