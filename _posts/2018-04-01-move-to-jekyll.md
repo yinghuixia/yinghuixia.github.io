@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Yinghui Xia, Move to Jekyll"
+title: "Move to Jekyll"
 date: 2018-04-01
 ---
 
