@@ -7,29 +7,4 @@ description: Data Scientist | 42% Confused
     <p class="lead"> Data scientist at PlayStation. </p>
     <p>You will find me making random animes, playing tennis, or dubbing math videos. <em>Don't panic.</em> </p>
     <p><a href="https://www.bilibili.com/video/av17442695/">Side Project</a> </p>
-
-<script>
-    clay.application.create('#main', {
-
-      width: window.innerWidth,
-      height: window.innerHeight,
-
-      init: function (renderer, scene, timeline) {
-        // Create camera
-        this._camera = app.createCamera([0, 2, 5], [0, 0, 0]);
-
-        // Create a RED cube
-        this._cube = app.createCube({
-            color: '#f00'
-        });
-
-        // Create light
-        this._mainLight = app.createDirectionalLight([-1, -1, -1]);
-      },
-
-      loop: function (renderer, scene, timeline) {
-        this._cube.rotation.rotateY(this.frameTime / 1000);
-      }
-    });
-</script>
 </div><!-- /.blurb -->
