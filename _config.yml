@@ -1,2 +1,5 @@
 name: Yinghui Xia
 markdown: kramdown
+
+plugins:
+  - jekyll-seo-tag
