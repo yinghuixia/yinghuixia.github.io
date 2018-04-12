@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "My roommate is an excellent engineer"
+title: "Data Scientist Mindset"
 date: 2018-04-07
 ---
 
