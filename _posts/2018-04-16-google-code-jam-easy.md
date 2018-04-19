@@ -15,5 +15,8 @@ It simply boils down to a linear equation - reminds me of the first time I saw a
 
 $$ D =  N_{s} + C_{1} \times 1 + C_{2} \times 2 + ... + C_{N_{c}} \times 2^{N_{c} - 1} $$
 
+<h3>Binomial Coefficients and Random Walk</h3>
+<a href="http://www.cs.ucsb.edu/~omer/DOWNLOADABLE/randomcatalan99.pdf">This paper</a> solves a lurking question, a clear hole when I learned stochastic process. I would be pumped to write a separate note on this topic next time.
+
 It's not worth posting the code here, here is 
 <a href="https://gist.github.com/yinghuixia/add2de5f60d09b8f8dde9d7dfe51ea44">my solution</a>
